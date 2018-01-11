@@ -24,7 +24,8 @@ public class Main {
             System.out.println("You seem uncertain, is it 'Yes' or 'No?'");
             playGame = playerInput.nextLine();
         }
-        //Yes or No input, ignoring capitalized answers, with While loop for Yes answer
+//------MAIN WHILE LOOP START
+        // Yes or No input, ignoring capitalized answers, with While loop for Yes answer
         while (playGame.equalsIgnoreCase("yes")) {
             System.out.println("Great! I'm so happy to play with you!");
 
@@ -35,7 +36,8 @@ public class Main {
             int correctNumber = rand.nextInt(high - low + low);
             //TODO: Figure out how to make range of numbers only 1-10; currently the Random block does 0-10.
 
-            //Get player input for first try
+    //----------FIRST GUESS SECTION
+            // Get player input for first try
             System.out.println("Let's play! Type a whole number between 0 and 10:");
             String playerGuess1s = playerInput.nextLine();
 
@@ -51,42 +53,47 @@ public class Main {
             //convert player input into new integer variable
             int playerGuess1i = Integer.parseInt(playerGuess1s);
 
-            //First try evaluation and response if guess is correct
+            //evaluation and response if first guess is correct
             if (correctNumber == playerGuess1i) {
                 System.out.println("And it's the right number!!  You win!!");
+                //pause
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException pause) {
                     pause.printStackTrace();
                 }
+                //ask to play again
                 System.out.println("Would you like to play again?");
                 String playAgain = playerInput.nextLine();
+
+                //Loop to deal with any answer other than Yes or No, ignoring capitalization
+                while (!(playAgain.equalsIgnoreCase("yes")) && (!(playAgain.equalsIgnoreCase("no")))) {
+                    System.out.println("C'mon! Make up your mind! Is it 'Yes' or 'No?'");
+                    playAgain = playerInput.nextLine();
+                }
+                //if-else to return to Main While loop start or end game
                 if ((playAgain.equalsIgnoreCase("yes"))) {
-                    continue;
+                    continue; //
                 } else {
                     System.out.println("Aww, that's too bad " + playerName + "! I really wanted to play with you. Good-bye!");
                     System.exit(0);
                 }
-//                playGame = playerInput.nextLine();
-//                while (!(playGame.equalsIgnoreCase("yes")) && (!(playGame.equalsIgnoreCase("no")))){
-//                    System.out.println("C'mon! Make up your mind! Is it 'Yes' or 'No?'");
-//                    playGame = playerInput.nextLine();
-//                    //TODO: Figure out how to deal with an answer that is not "Yes" or "No".
-//                }
-//                //response if guess is incorrect
+            //response if first guess is incorrect
             } else {
                 System.out.println("But it's not the right number.");
             }
-            //Get player input for second guess
+    //----------SECOND GUESS SECTION
+            // Get player input for second guess
             System.out.println("You get two more guesses. What's your next guess?");
             String playerGuess2s = playerInput.nextLine();
             System.out.println(playerGuess2s + " is another good guess...");
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException pause) {
                 pause.printStackTrace();
             }
-            //convert player input into new integer variable
+
             int playerGuess2i = Integer.parseInt(playerGuess2s);
 
             if (correctNumber == playerGuess2i) {
@@ -98,24 +105,23 @@ public class Main {
                 }
                 System.out.println("Would you like to play again?");
                 String playAgain = playerInput.nextLine();
+
+                while (!(playAgain.equalsIgnoreCase("yes")) && (!(playAgain.equalsIgnoreCase("no")))) {
+                    System.out.println("C'mon! Make up your mind! Is it 'Yes' or 'No?'");
+                    playAgain = playerInput.nextLine();
+                }
                 if ((playAgain.equalsIgnoreCase("yes"))) {
                     continue;
                 } else {
                     System.out.println("Aww, that's too bad " + playerName + "! I really wanted to play with you. Good-bye!");
                     System.exit(0);
                 }
-//                playGame = playerInput.nextLine();
-//                while (!(playGame.equalsIgnoreCase("yes")) && (!(playGame.equalsIgnoreCase("no")))){
-//                    System.out.println("C'mon! Make up your mind! Is it 'Yes' or 'No?'");
-//                    playGame = playerInput.nextLine();
-//                    //TODO: Figure out how to deal with an answer that is not "Yes" or "No".
-//                }
-//                //response if guess is incorrect
             } else {
                 System.out.println("but it's not the right number either.");
             }
 
-            //Get player input for second guess
+    //----------THIRD GUESS SECTION
+            // Get player input for third guess
             System.out.println("One more chance! What's your last guess?");
             String playerGuess3s = playerInput.nextLine();
             System.out.println("Hmm, " + playerGuess3s + "...that's a good guess too...");
@@ -155,6 +161,7 @@ public class Main {
                 }
             }
         }
+//------MAIN WHILE LOOP END
         if (playGame.equalsIgnoreCase("no")) {
             System.out.println("Aww, that's too bad " + playerName + "! I really wanted to play with you. Good-bye!");
             System.exit(0);
